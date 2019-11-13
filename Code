@@ -87,10 +87,10 @@ dbExecute(conn, "CREATE TABLE Tweet_Data(
 # application's access tokens and secrets as described in the beginning:
 
 token <- create_token(app = 'DataPipelineByMeto',
-                      consumer_key = 'KbGmdwuKmCLEB9PmxV0D02lJg',
-                      consumer_secret = 'YJZHC3yfxeYBnvUv3a8x0OmF70Ul4xoT01wS5UobrJEAalm153',
-                      access_token = '1181807188337143808-DBPG5pfMd0ugdZogNrG4feNh9Kk8Ks',
-                      access_secret = '9X01MZNFPPpkYT58c3zsnqZ1Qj7SlOAzMRTpeSYNtqmlH')
+                      consumer_key = 'KEY_HERE',
+                      consumer_secret = 'KEY_HERE',
+                      access_token = 'KEY_HERE',
+                      access_secret = 'KEY_HERE')
 
 # stream tweets containing hashtags related to DataScience
 
@@ -221,54 +221,11 @@ wordcloud(words = freq_df$words, freq = freq_df$freq, min.freq = 10,
 # Plot usuing wordcloud2
 wordcloud2(freq_df, size = 0.7, shape = 'cardioid')
 
-###############################################################################################
-######################            Step 4 Sentiment Analysis             ####################### 
-###############################################################################################
-
-# Convert the text to lower case, so that words like “write” and “Write” are considered the same word for analysis
-## Remove numbers
-## Remove English stopwords e.g “the”, “is”, “of”, etc
-## Remove punctuation e.g “,”, “?”, etc
-## Eliminate extra white spaces
-## Stemming our text 
-
-docs <- Corpus(VectorSource(Tweets_df))
-
-# Convert the text to lower case
-docs <- tm_map(docs, content_transformer(tolower))
-# Remove numbers
-docs <- tm_map(docs, removeNumbers)
-# Remove english common stopwords
-docs <- tm_map(docs, removeWords, stopwords("english"))
-
-## To stepm the text
-
-library(SnowballC)
-docs <- tm_map(docs, stemDocument)
-
-## building a matrix Using the SnowballC library to stem text
-
-dtm <- TermDocumentMatrix(docs)
-m <- as.matrix(dtm)
-v <- sort(rowSums(m),decreasing=TRUE)
-d <- data.frame(word = names(v),freq=v)
-head(d, 10)
-
-## Generating a wordcloud
-
-library(wordcloud)
-library(RColorBrewer)
-par(bg="grey30")
-png(file="WordCloud.png",width=1000,height=700, bg="grey30")
-wordcloud(d$word, d$freq, col=terrain.colors(length(d$word), alpha=0.9), random.order=FALSE, rot.per=0.3 )
-title(main = "Most common words", font.main = 1, col.main = "cornsilk3", cex.main = 1.5)
-dev.off()
-
 ######################################################################## 
 #####################      Sentiment Analysis      #####################
 ######################################################################## 
 
-# Alternaive - continuation / Visualize and Plot the Sentiment using the Syuzhet library
+Visualize and Plot the Sentiment using the Syuzhet library
 
 # “syuzhet” uses NRC Emotion lexicon. The NRC emotion lexicon is a list of words and their associations 
 # with eight emotions (anger, fear, anticipation, trust, surprise, sadness, joy, and disgust) and two 
