@@ -1,2 +1,2 @@
-# TwitterDataPipeline
-Bulding a Data pipeline from Twitter with R, storing the tweets in SQLite and performing sentiment analysis.
+# Twitter Data Pipeline
+Sourcing Twitter data with R and storing it in SQLite for sentiment analysis.
